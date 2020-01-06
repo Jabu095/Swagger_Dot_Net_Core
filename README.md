@@ -4,9 +4,15 @@ Swagger api documentation and JWT integration for C# .NET CORE 2 and below,
 This project can be used to quickly and swagger documentation for your APIS and also incluids the JWT swagger intergration
 
 Example usage:
+1. Install the standard Nuget package into your ASP.NET Core application.
 
+  Install-Package Swagger_Dot_Net_Core -Version 1.0.3
+  dotnet add package Swagger_Dot_Net_Core --version 1.0.3
+  <PackageReference Include="Swagger_Dot_Net_Core" Version="1.0.3" />
+  paket add Swagger_Dot_Net_Core --version 1.0.3
+  
+2. Add the following code on Startup.cs class
 ```csharp
-StartUp file
 
 public void ConfigureServices(IServiceCollection services)
 {
