@@ -26,6 +26,7 @@ namespace Swagger_Dot_Net_Core
                   });
 
                     c.IncludeXmlComments(swaggerIntegration.xmlPath);
+                    c.OperationFilter<SwaggerFileOperationFilter>();
                 });
             }
 
