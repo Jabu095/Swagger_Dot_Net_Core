@@ -1,4 +1,5 @@
-﻿using Swashbuckle.AspNetCore.Swagger;
+﻿using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
@@ -9,23 +10,24 @@ namespace Swagger_Dot_Net_Core
 {
     public class SwaggerFileOperationFilter : IOperationFilter
     {
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             var fileParams = context.MethodInfo.GetParameters()
                 .Where(p => p.ParameterType.FullName.Equals(typeof(Microsoft.AspNetCore.Http.IFormFile).FullName));
 
             if (fileParams.Any() && fileParams.Count() == 1)
             {
-                operation.Parameters = new List<IParameter>
+                operation.Parameters.Add(new OpenApiParameter
                 {
-                    new NonBodyParameter
+                    Name = fileParams.First().Name,
+                    In = ParameterLocation.Header,
+                    Required = true,
+                    Schema = new OpenApiSchema
                     {
-                        Name = fileParams.First().Name,
-                        Required = true,
                         Type = "file",
-                        In = "formData"
+                        Format = "formData"
                     }
-                };
+                });
             }
         }
     }

@@ -9,15 +9,6 @@ namespace Swagger_Dot_Net_Core
     {
         public static void Register(IApplicationBuilder app, bool isSwaggerConfig = false)
         {
-            // global cors policy
-            app.UseCors(x => x
-            .AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials());
-
-            app.UseAuthentication();
-
             if (isSwaggerConfig)
             {
                 app.UseSwagger();
